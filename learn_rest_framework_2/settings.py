@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'api_v5.apps.ApiV5Config',
+    'api_v6.apps.ApiV6Config'
 ]
 
 MIDDLEWARE = [
@@ -140,8 +141,44 @@ REST_FRAMEWORK = {
     ],
     # 全局配置异常模块
     'EXCEPTION_HANDLER': 'utils.exception.exception_handler',
+    # 认证类配置
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication'
+        'api_v5.authentications.MyAuthentication'
+    ],
+    # 权限类配置
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+    # 频率类配置
+    'DAFAULT_THROTTLE_CLASSES':[],
+    'DEFAULT_THROTTLE_RATES':{
+        # 'user': '3/min',
+        # 'anon': None,
+        # 'sms': '1/min'
+    }
 }
 
 
 # 配置自定义user表
 AUTH_USER_MODEL = 'api_v5.User'
+
+import datetime
+JWT_AUTH = {
+    # payload => token
+    'JWT_ENCODE_HANDLER':
+        'rest_framework_jwt.utils.jwt_encode_handler',
+    # token => payload
+    'JWT_DECODE_HANDLER':
+        'rest_framework_jwt.utils.jwt_decode_handler',
+    # user => payload
+    'JWT_PAYLOAD_HANDLER':
+        'rest_framework_jwt.utils.jwt_payload_handler',
+    # token过期时间
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),
+    # token刷新的过期时间
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
+    # 反爬小措施前缀
+    'JWT_AUTH_HEADER_PPREFIX': 'JWT'
+}

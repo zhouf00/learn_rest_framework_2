@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
     url(r'^apiv5/', include('api_v5.urls')),
+    url(r'^apiv6/', include('api_v6.urls')),
 
     url(r'^media/(?P<path>.*)', serve, {'document_root': settings.MEDIA_ROOT}),
 ]
