@@ -8,5 +8,7 @@ urlpatterns = [
     url(r'^jlogin/$', obtain_jwt_token),
     url(r'user/detail/$', views.UserDetail.as_view()),
 
-    url(r'login/$', views.LoginAPIView.as_view()),
+    url(r'^login/$', views.LoginAPIView.as_view()),
+
+    url(r'^cars/$', views.CarListAPIView.as_view()),
 ]

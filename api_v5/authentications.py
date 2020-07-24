@@ -1,5 +1,4 @@
 # 自定义认证类
-
 from rest_framework.authentication import BaseAuthentication
 from rest_framework.exceptions import AuthenticationFailed
 from . import models
